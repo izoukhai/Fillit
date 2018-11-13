@@ -16,15 +16,21 @@
 void				fillit(int fd)
 {
 	t_tetri			*list;
-	int				i = -1;
+	int i = -1;
+	int j = 0;
+	int	ret;
 	if ((list = create_tetri()) == NULL)
 		return;
-	i = count_tetris(fd);
-	printf("%d\n", i);
-	i += 1;
-	while (--i)
-		get_all_tetri(fd, &list);
-	i = -1;
-	while (++i < 4)
-		printf("%s\n", list->tab[i]);
+	while ((ret = get_all_tetri(fd, &list)) == 1)
+		;
+	if (ret == -1)
+		return;
+	while (list->next)
+	{
+		i = -1;
+		while (list->tab[++i] && i < 4)
+			printf("%s\n", list->tab[i]);
+		j++;
+		list = list->next;
+	}
 }

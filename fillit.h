@@ -19,9 +19,7 @@ typedef struct		s_tetri
 	struct s_tetri	*next;
 }					t_tetri;
 
-t_tetri				*create_tetri();
-void				get_all_tetri(int fd, t_tetri **list);
+void				fillit(int fd);
 void				add_tetri(t_tetri **list, t_tetri *new);
-void				fillit();
-int					count_tetris(int fd);
-int					check_tetri();
+t_tetri				*create_tetri();
+int					get_all_tetri(int fd, t_tetri **list);

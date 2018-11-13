@@ -29,11 +29,12 @@ t_tetri		*create_tetri()
 
 	if ((res = (t_tetri*)malloc(sizeof(t_tetri))) == NULL)
 		return (NULL);
-	if ((res->tab = (char**)malloc(sizeof(char*) * 5)) == NULL)
+	if ((res->tab = (char**)malloc(sizeof(char*) * 4)) == NULL)
 		return (NULL);
 	i =  -1;
-	while (++i < 5)
+	while (++i < 4)
 		if ((res->tab[i] = ft_strnew(4)) == NULL)
 			return (NULL);
+	res->next = NULL;
 	return (res);
 }

@@ -13,53 +13,37 @@
 
 #include "fillit.h"
 
-static int		ft_strichr(char *s, char c)
+static int			check_error(char *line, int x)
 {
-	size_t		i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
+	if (x % 5 == 0 && ft_strlen(line) != 0)
+		return (-1);
+	if (ft_strlen(line) != 4 && (x % 5 >= 1 && x % 5 <= 4))
+		return (-1);
+	return (0);
 }
 
-int					count_tetris(int fd)
+int					get_all_tetri(int fd, t_tetri **list)
 {
-	char *line;
-	int counter;
-	int	i;
-
-	i = 0;
-	counter = 0;
-	while (get_next_line(fd, &line) == 1)
-	{
-		if (line[0] == '\0')
-			counter++;
-	}
-	return (counter);
-}
-
-void				get_all_tetri(int fd, t_tetri **list)
-{
-	t_tetri			*new;
 	char			*line;
-	int				i;
+	t_tetri			*cur;
+	int				x;
+	int				curr;
 
-	i = -1;
-	if ((new = create_tetri()) == NULL)
-		return;
-	while (get_next_line(fd, &line) == 1 && ++i < 4)
+	x = 1;
+	cur = create_tetri();
+	curr = -1;
+	while ((get_next_line(fd, &line)) == 1)
 	{
-		if (ft_strichr(line, '\n') != -1)
+		if (check_error(line, x) == -1)
+			return (-1);
+		if (x % 5 == 0)
 		{
-			i--;
-			continue;
+			add_tetri(list, cur);
+			return (1);
 		}
-		new->tab[i] = ft_strcpy(new->tab[i], line);
+		cur->tab[++curr] = line;
+		x++;
 	}
-	add_tetri(list, new);
+	add_tetri(list, cur);
+	return (0);
 }
