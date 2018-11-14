@@ -25,6 +25,7 @@ int        check_map(char **line)
 
     while (line[y])
     {
+<<<<<<< HEAD
     	x = 0;
         while (line[y][x] && (line[y][x] == '.' || line[y][x] == '#'))
         {
@@ -39,7 +40,11 @@ int        check_map(char **line)
             x++;
         }
         y++;
+=======
+        
+>>>>>>> 1ff7dbf4cde9add91a563d06ee369423b4077026
     }
+    printf("%d\n", link_counter);
     if (link_counter != 6 && link_counter != 8)
         return (-1);
     return (link_counter);
@@ -59,10 +64,8 @@ void				fillit(int fd)
 		return;
 	while (list->next)
 	{
-		i = -1;
-		while (list->tab[++i] && i < 4)
-			printf("%s\n", list->tab[i]);
-		j++;
+        int res = check_map(list->tab);
+		printf("%d: %s\n", res, list->tab[i]);
 		list = list->next;
 	}
 }

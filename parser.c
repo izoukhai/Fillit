@@ -50,14 +50,12 @@ int					get_all_tetri(int fd, t_tetri **list)
 	{
 		if (check_error(line, x, max) == -1)
 			return (-1);
-		if (x % 5 == 0)
+		if (x++ % 5 == 0 && ++max)
 		{
-			max++;
 			add_tetri(list, cur);
 			return (1);
 		}
 		cur->tab[++curr] = line;
-		x++;
 	}
 	if (res == 0 && x-1 % 5 == 0)
 		return (-1);
