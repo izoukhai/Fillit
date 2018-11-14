@@ -28,14 +28,10 @@ int        check_map(char **line)
     	x = 0;
         while (line[y][x] && (line[y][x] == '.' || line[y][x] == '#'))
         {
-            if (y > 0 && line[y][x] == '#' && (line[y - 1][x] == '#'))
-            	link_counter++;
-            if (x > 0 && line[y][x] == '#' && (line [y][x - 1] == '#'))
-            	link_counter++;
-            if (x < 3 && line[y][x] == '#' && (line[y][x + 1] == '#'))
-            	link_counter++;
-            if (y < 3 && line[y][x] == '#' && (line[y + 1][x] == '#'))
-                link_counter++;
+            (y > 0 && line[y][x] == '#' && (line[y - 1][x] == '#')) ? link_counter++ : 0;
+            (x > 0 && line[y][x] == '#' && (line [y][x - 1] == '#')) ? link_counter++ : 0;
+            (x < 3 && line[y][x] == '#' && (line[y][x + 1] == '#')) ? link_counter++ : 0;
+            (y < 3 && line[y][x] == '#' && (line[y + 1][x] == '#')) ? link_counter++ : 0;
             x++;
         }
         y++;
@@ -45,23 +41,43 @@ int        check_map(char **line)
     return (link_counter);
 }
 
+t_tetri             *resolve(t_tetri *list)
+{
+    t_tetri         *res;
+    int             x;
+    int             y;
+    char            fill;
+
+    fill = 'Z';
+    x = y = 0;
+    res = create_tetri();
+}
+
+static t_tetri      *rev_list(t_tetri *list)
+{
+    
+}
+
 int 				fillit(int fd)
 {
 	t_tetri			*list;
-	int i = -1;
-	int j = 0;
-	int	ret;
+    int             ret;
+    char            fill;
+
+    fill = 'A';
 	if ((list = create_tetri()) == NULL)
 		return (-1);
 	while ((ret = get_all_tetri(fd, &list)) == 1)
-		;
-	if (ret == -1)
-		return (-1);
+	   if (ret == -1)
+		  return (-1);
+    rev
 	while (list->next)
 	{
         if (check_map(list->tab) == (-1))
             return (-1);
-		printf("%d\n", res);
+        list->fill = fill++;
+        printf("%c\n", list->fill);
 		list = list->next;
 	}
+    return (1);
 }
