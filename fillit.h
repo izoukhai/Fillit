@@ -23,3 +23,4 @@ void				fillit(int fd);
 void				add_tetri(t_tetri **list, t_tetri *new);
 t_tetri				*create_tetri();
 int					get_all_tetri(int fd, t_tetri **list);
+int					check_map(char **line);
