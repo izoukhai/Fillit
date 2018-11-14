@@ -27,7 +27,7 @@ int        check_map(char **line)
     {
         while (line[y][x] && (line[y][x] == '.' || line[y][x] == '#'))
         {
-            if (line[y][x] == '#' && (line[y - 1][x] == '#' && x y > 0) ||
+            if ((line[y - 1][x] == '#' && y > 0) ||
              (line [y][x - 1] == '#' && x > 0) ||
              (line[y][x + 1] == '#' && x < 4) || (line[y + 1][x] == '#' && y < 4))
                 link_counter++;
