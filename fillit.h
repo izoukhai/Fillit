@@ -11,11 +11,13 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft/includes/get_next_line.h"
+# include "libft/includes/get_next_line.h"
+# define MALLCHECK(x) if (!x) return (-1);
 
 typedef struct		s_tetri
 {
 	char			**tab;
+	char			fill;
 	struct s_tetri	*next;
 }					t_tetri;
 
@@ -24,3 +26,4 @@ void				add_tetri(t_tetri **list, t_tetri *new);
 t_tetri				*create_tetri();
 int					get_all_tetri(int fd, t_tetri **list);
 int					check_map(char **line);
+t_tetri				*resolve(t_tetri *list);

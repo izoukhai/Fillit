@@ -18,7 +18,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 # define BUFF_SIZE 5
-# define MALLCHECK(x) if (!x) return (-1)
 
 int		get_next_line(const int fd, char **line);
 

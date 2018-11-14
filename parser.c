@@ -43,7 +43,7 @@ int					get_all_tetri(int fd, t_tetri **list)
 	int				curr;
 	int				res;
 
-	cur = create_tetri();
+	MALLCHECK((cur = create_tetri()));
 	curr = -1;
 	x = 1;
 	while ((res = get_next_line(fd, &line)) == 1)
