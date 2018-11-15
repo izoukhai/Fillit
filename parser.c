@@ -13,12 +13,45 @@
 
 #include "fillit.h"
 
-static int			strsearch(char *str, char c)
+int					check_hashtag(char **line)
 {
-	while (*str++)
-		if (*str == c)
-			return (1);
-	return (0);
+	int				y;
+	int				x;
+	int				res;
+
+	res = 0;
+	y = -1;
+	while (line[++y] && y < 4)
+	{
+		x = -1;
+		while (line[y][++x])
+			if (line[y][x] == '#')
+				res++;
+	}
+	return (res);
+}
+
+void				check_connex(int y, int x, int *lnk, char **line)
+{
+	(y >= 1 && line[y][x] == '#' && (line[y - 1][x] == '#')) ?
+		(*lnk)++ : *lnk;
+	(x >= 1 && line[y][x] == '#' && (line[y][x - 1] == '#')) ?
+		(*lnk)++ : *lnk;
+	(x <= 3 && line[y][x] == '#' && (x < 3 && (line[y][x + 1] == '#'))) ?
+		(*lnk)++ : *lnk;
+	(y <= 3 && line[y][x] == '#' && (y < 3 && (line[y + 1][x] == '#'))) ?
+		(*lnk)++ : *lnk;
+}
+
+static int			strsearch(char *str)
+{
+	while (*str)
+	{
+		if (*str != '.' && *str != '#')
+			return (0);
+		str++;
+	}
+	return (1);
 }
 
 static int			check_error(char *line, int x, int max)
@@ -29,7 +62,7 @@ static int			check_error(char *line, int x, int max)
 		return (-1);
 	if (ft_strlen(line) != 4 && (x % 5 != 0))
 		return (-1);
-	if (!strsearch(line, '.') && !strsearch(line, '#') && (x % 5) != 0)
+	if (!strsearch(line) && (x % 5) != 0)
 		return (-1);
 	return (0);
 }
@@ -38,15 +71,14 @@ int					get_all_tetri(int fd, t_tetri **list)
 {
 	char			*line;
 	t_tetri			*cur;
-	int				x = 1;
+	int				x;
 	static int		max = 1;
 	int				curr;
-	int				res;
 
 	MALLCHECK((cur = create_tetri()));
 	curr = -1;
 	x = 1;
-	while ((res = get_next_line(fd, &line)) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
 		if (check_error(line, x, max) == -1)
 			return (-1);
@@ -57,7 +89,7 @@ int					get_all_tetri(int fd, t_tetri **list)
 		}
 		cur->tab[++curr] = line;
 	}
-	if (res == 0 && x-1 % 5 == 0)
+	if ((x - 1) % 5 == 0)
 		return (-1);
 	add_tetri(list, cur);
 	return (0);
