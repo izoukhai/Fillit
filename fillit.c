@@ -61,9 +61,11 @@ int					fillit(int fd)
 		int i = -1;
 		if (check_map(list->tab, &list) == -1)
 			return (-1);
+		list->fill = fill++;
+		printf("%c\n", list->fill);
 		while (++i < 4)	
 			printf("x: %d, y: %d\n", list->pos[i].x, list->pos[i].y);
-		list->fill = fill++;
+		printf("\n");
 		list = list->next;
 	}
 	res = solve(old);
