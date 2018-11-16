@@ -4,7 +4,7 @@ NAME= fillit
 OBJ_PATH= ./obj/
 SRC_PATH=./
 
-SRC_NAME  =  fillit.c main.c parser.c tetriominos.c
+SRC_NAME  =  fillit.c main.c  parser.c tetriminos.c 
 OBJ_NAME= $(SRC_NAME:.c=.o)
 OBJ= $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 SRC= $(addprefix $(SRC_PATH), $(SRC_NAME))
@@ -23,15 +23,15 @@ $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
 
 $(NAME): $(OBJ_PATH) $(OBJ) $(INCLUDES)
-		@ar -rc $(NAME) $(SRCO)
 		@make -C libft/
+		@$(CC) $(CFLAGS) -o $(NAME) $(SRC_NAME) ./libft/libft.a
 		@echo "\033[32m[Your Fillit is ready]\033[0m"
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 		@echo  "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
 		@gcc $(FLAGS) -o $@ -c $^
 clean :
-		@rm -rf $(SRCO)
+		@rm -rf $(OBJ_PATH)
 		@make clean -C libft/ 
 		@echo "\033[0;32m [OK] \033[0m       \033[0;33m File.o deleted:\033[0m" $<
 
