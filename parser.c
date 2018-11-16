@@ -13,20 +13,27 @@
 
 #include "fillit.h"
 
-int					check_hashtag(char **line)
+int					check_hashtag(char **line, t_tetri **piece)
 {
 	int				y;
 	int				x;
 	int				res;
+	int				i;
 
 	res = 0;
 	y = -1;
+	i = 0;
 	while (line[++y] && y < 4)
 	{
 		x = -1;
 		while (line[y][++x])
 			if (line[y][x] == '#')
+			{
+				(*piece)->pos[i].x = x;
+				(*piece)->pos[i].y = y;
+				i++;
 				res++;
+			}
 	}
 	return (res);
 }

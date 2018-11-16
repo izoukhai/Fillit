@@ -13,7 +13,7 @@
 
 #include "fillit.h"
 
-int					check_map(char **line)
+int					check_map(char **line, t_tetri **piece)
 {
 	int				y;
 	int				x;
@@ -22,7 +22,7 @@ int					check_map(char **line)
 	y = 0;
 	x = 0;
 	link_counter = 0;
-	if (check_hashtag(line) != 4)
+	if (check_hashtag(line, piece) != 4)
 		return (-1);
 	while (line[y] && y < 4)
 	{
@@ -54,12 +54,15 @@ int					fillit(int fd)
 			return (-1);
 	sort_tetri(&list);
 	list = list->next;
+	
 	old = list;
 	while (list)
 	{
-
-		if (check_map(list->tab) == -1)
+		int i = -1;
+		if (check_map(list->tab, &list) == -1)
 			return (-1);
+		while (++i < 4)	
+			printf("x: %d, y: %d\n", list->pos[i].x, list->pos[i].y);
 		list->fill = fill++;
 		list = list->next;
 	}

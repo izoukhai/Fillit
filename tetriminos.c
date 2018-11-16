@@ -26,6 +26,7 @@ t_tetri		*create_tetri(void)
 {
 	int		i;
 	t_tetri	*res;
+	t_point *pos;
 
 	if ((res = (t_tetri*)malloc(sizeof(t_tetri))) == NULL)
 		return (NULL);
@@ -35,6 +36,14 @@ t_tetri		*create_tetri(void)
 	while (++i < 4)
 		if ((res->tab[i] = ft_strnew(4)) == NULL)
 			return (NULL);
+	i = -1;
+	while (++i < 4)
+	{
+		pos = (t_point*)malloc(sizeof(t_point));
+		pos->x = -1;
+		pos->y = -1;
+		res->pos[i] = *pos;
+	}
 	res->next = NULL;
 	return (res);
 }

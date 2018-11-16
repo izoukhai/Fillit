@@ -16,20 +16,27 @@
 # include "libft/includes/get_next_line.h"
 # define MALLCHECK(x) if (!x) return (-1);
 
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+}					t_point;
+
 typedef struct		s_tetri
 {
 	char			**tab;
 	char			fill;
+	t_point			pos[4];
 	struct s_tetri	*next;
 }					t_tetri;
 
 int					fillit(int fd);
-int					check_hashtag(char **line);
+int					check_hashtag(char **line, t_tetri **piece);
 void				check_connex(int y, int x, int *lnk, char **line);
 void				add_tetri(t_tetri **list, t_tetri *new);
 t_tetri				*create_tetri();
 int					get_all_tetri(int fd, t_tetri **list);
-int					check_map(char **line);
+int					check_map(char **line, t_tetri **piece);
 t_tetri				*solve(t_tetri *list);
 void				sort_tetri(t_tetri **list);
 
