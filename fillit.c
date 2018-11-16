@@ -39,20 +39,6 @@ int					check_map(char **line)
 	return (link_counter);
 }
 
-t_tetri				*solve(t_tetri *list)
-{
-	t_tetri			*res;
-
-	if ((res = create_tetri()) == NULL)
-		return (NULL);
-	while (list)
-	{
-		printf("%c\n", list->fill);
-		list = list->next;
-	}
-	return (res);
-}
-
 int					fillit(int fd)
 {
 	t_tetri			*list;
@@ -71,6 +57,7 @@ int					fillit(int fd)
 	old = list;
 	while (list)
 	{
+
 		if (check_map(list->tab) == -1)
 			return (-1);
 		list->fill = fill++;
