@@ -30,6 +30,12 @@ typedef struct		s_tetri
 	struct s_tetri	*next;
 }					t_tetri;
 
+typedef struct		s_map
+{
+	char			**tab;
+	size_t			size;
+}					t_map;
+
 int					fillit(int fd);
 int					check_hashtag(char **line, t_tetri **piece);
 void				check_connex(int y, int x, int *lnk, char **line);
@@ -39,5 +45,7 @@ int					get_all_tetri(int fd, t_tetri **list);
 int					check_map(char **line, t_tetri **piece);
 t_tetri				*solve(t_tetri *list);
 void				sort_tetri(t_tetri **list);
+t_map				*new_map(size_t size);
+void				del_map(t_map *map);
 
 #endif
