@@ -29,8 +29,8 @@ int					check_hashtag(char **line, t_tetri **piece)
 		while (line[y][++x])
 			if (line[y][x] == '#')
 			{
-				(*piece)->pos[i].x = x;
-				(*piece)->pos[i].y = y;
+				(*piece)->pos[i].x = x + 1;
+				(*piece)->pos[i].y = y + 1;
 				i++;
 				res++;
 			}
