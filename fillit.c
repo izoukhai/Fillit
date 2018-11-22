@@ -67,5 +67,7 @@ int					fillit(int fd)
 		printf("\n");
 		list = list->next;
 	}
+	t_map *map = new_map(15);
+	solve_map(map, old);
 	return (1);
 }

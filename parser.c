@@ -35,6 +35,9 @@ int					check_hashtag(char **line, t_tetri **piece)
 				res++;
 			}
 	}
+	(*piece)->top = get_top(*piece);
+	printf("TOP.X: %d\n", (*piece)->top.x);
+	printf("TOP.Y: %d\n", (*piece)->top.y);
 	return (res);
 }
 

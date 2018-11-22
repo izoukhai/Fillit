@@ -27,6 +27,7 @@ typedef struct		s_tetri
 	char			**tab;
 	char			fill;
 	t_point			pos[4];
+	t_point			top;
 	struct s_tetri	*next;
 }					t_tetri;
 
@@ -38,6 +39,7 @@ typedef struct		s_map
 
 int					fillit(int fd);
 int					check_hashtag(char **line, t_tetri **piece);
+t_point				get_top(t_tetri *list);
 void				check_connex(int y, int x, int *lnk, char **line);
 void				add_tetri(t_tetri **list, t_tetri *new);
 t_tetri				*create_tetri();
@@ -48,5 +50,6 @@ t_map				*solve(t_tetri *list);
 void				sort_tetri(t_tetri **list);
 t_map				*new_map(size_t size);
 void				del_map(t_map *map);
+void				print_map(t_map *map);
 
 #endif

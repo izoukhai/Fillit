@@ -12,6 +12,7 @@ t_map		*new_map(size_t size)
 	i = -1;
 	while (++i < size)
 	{
+		res->tab[i] = ft_strnew(size);
 		j = -1;
 		while (++j < size)
 			res->tab[i][j] = '.';
@@ -28,4 +29,13 @@ void		del_map(t_map *map)
 		free(map->tab[i]);
 	free(map->tab);
 	free(map);
+}
+
+void		print_map(t_map *map)
+{
+	int		i;
+
+	i = -1;
+	while (++i < map->size)
+		ft_putendl(map->tab[i]);
 }

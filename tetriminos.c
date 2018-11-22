@@ -32,6 +32,8 @@ t_tetri		*create_tetri(void)
 		return (NULL);
 	if ((res->tab = (char**)malloc(sizeof(char*) * 4)) == NULL)
 		return (NULL);
+	res->top.x = -1;
+	res->top.y = -1;
 	i = (-1);
 	while (++i < 4)
 		if ((res->tab[i] = ft_strnew(4)) == NULL)
@@ -65,4 +67,23 @@ void		sort_tetri(t_tetri **list)
 		tmp2 = tmp3;
 	}
 	*list = tmp;
+}
+
+t_point		get_top(t_tetri *list)
+{
+	t_point	res;
+	int 	i;
+
+	i = -1;
+	res.x = 1;
+	res.y = 1;
+	t_tetri *tmp = list;
+	while (++i < 4)
+	{ 
+		if (list->pos[i].x < res.x)
+			res.x = list->pos[i].x;
+		if (list->pos[i].y < res.y)
+			res.y = list->pos[i].y;
+	}
+	return (res);
 }
