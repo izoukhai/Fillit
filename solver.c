@@ -15,7 +15,12 @@
 
 static int			get_sqrt(int n)
 {
-	
+	int tmp;
+
+	tmp = nb / 2;
+	while (tmp * tmp > nb)
+		tmp--;
+	return ((tmp * tmp == nb) ? tmp : tmp + 1);
 }
 
 int					solve_map(t_map *map, t_tetri *list)
