@@ -23,6 +23,18 @@ static int			get_sqrt(int nb)
 	return ((tmp * tmp == nb) ? tmp : tmp + 1);
 }
 
+static void			move_left(t_tetri **list)
+{
+	int i;
+
+	i = -1;
+	while ((*list)->top.x != 0 && ++i < 4)
+		(*list)->pos[i].x--;
+	i = -1;
+	while ((*list)->top.y != 0 && ++i < 4)
+		(*list)->pos[i].y--;
+}
+
 int					solve_map(t_map *map, t_tetri *list)
 {
 	int				i;
@@ -35,18 +47,12 @@ int					solve_map(t_map *map, t_tetri *list)
 	y = 0;
 	while (list)
 	{
+		move_left(&list);
 		i = -1;	
 		while (++i < 4)
 		{
-			j = -1;
-			while (++j < 4)
-			{
-				if (list->tab[i][j] == '#' && map->tab[y][x] == '.')
-				{
-					map->tab[y][x] = list->fill;
-					x++;
-				}
-			}
+			if (map->tab[list->pos[i].y][list->pos[i].x] == '.')
+				map->tab[list->pos[i].y][list->pos[i].x] = list->fill;
 		}
 		list = list->next;
 	}
