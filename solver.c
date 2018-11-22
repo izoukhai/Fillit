@@ -13,7 +13,24 @@
 
 #include "fillit.h"
 
-t_tetri				*solve(t_tetri *list)
+static int			get_sqrt(int n)
 {
 	
+}
+
+int					solve_map(t_map *map, t_tetri *list)
+{
+	int				i;
+	int				j;
+
+	i = -1;
+	while (list)
+	{
+		while (++i < 4)
+		{
+			j = -1;
+			while (++j < 4)
+		}
+		list = list->next;
+	}
 }

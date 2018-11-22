@@ -54,7 +54,6 @@ int					fillit(int fd)
 			return (-1);
 	sort_tetri(&list);
 	list = list->next;
-	
 	old = list;
 	while (list)
 	{
@@ -68,6 +67,5 @@ int					fillit(int fd)
 		printf("\n");
 		list = list->next;
 	}
-	res = solve(old);
 	return (1);
 }
