@@ -28,33 +28,69 @@ static void			move_left(t_tetri **list)
 	int i;
 
 	i = -1;
-	while ((*list)->top.x != 0 && ++i < 4)
-		(*list)->pos[i].x--;
-	i = -1;
-	while ((*list)->top.y != 0 && ++i < 4)
-		(*list)->pos[i].y--;
+	if ((*list)->top.x != 0)
+	{
+		(*list)->top.x--;
+		while (++i < 4)
+			(*list)->pos[i].x--;
+		move_left(list);
+	}
+	if ((*list)->top.y != 0)
+	{
+		(*list)->top.y--;
+		while (++i < 4)
+			(*list)->pos[i].y--;
+		move_left(list);
+	}
+}
+
+static void			print_pos(t_tetri *list)
+{
+	int i = -1;
+
+	while (++i < 4)
+		printf("%c: x: %d, y: %d\n", list->fill, list->pos[i].x, list->pos[i].y);
 }
 
 int					solve_map(t_map *map, t_tetri *list)
 {
-	int				i;
-	int				j;
-	int				y;
-	int				x;
+	t_point			pos;
 
-	i = -1;
-	x = 0;
-	y = 0;
-	while (list)
+	pos.y = -1;
+	if (list == NULL)
+		return (1);
+	while (++pos.y < map->size)
 	{
-		move_left(&list);
-		i = -1;	
-		while (++i < 4)
+		pos.x = -1;
+		while (++pos.x < map->size)
 		{
-			if (map->tab[list->pos[i].y][list->pos[i].x] == '.')
-				map->tab[list->pos[i].y][list->pos[i].x] = list->fill;
+			if (check_pmap(list, map, pos))
+			{
+				if (solve_map(map, list->next))
+					return (1);
+				else
+					pmap(list, map, pos, '.');
+			}
 		}
-		list = list->next;
 	}
-	print_map(map);
+	return (0);
+}
+
+t_map			*solve(t_tetri *list)
+{
+	t_tetri 	*cur;
+	t_map 		*res;
+	int 		size;
+
+	cur = list;
+	size = get_sqrt(count_tetris(list) * 4);
+	res = new_map(size);
+	while (!solve_map(res, cur))
+	{
+		size++;
+		del_map(&res);
+		res = new_map(size);
+	}
+	print_map(res);
+	return (res);
 }

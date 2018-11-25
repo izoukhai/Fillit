@@ -77,13 +77,27 @@ t_point		get_top(t_tetri *list)
 	i = -1;
 	res.x = 1;
 	res.y = 1;
-	t_tetri *tmp = list;
 	while (++i < 4)
 	{ 
 		if (list->pos[i].x < res.x)
 			res.x = list->pos[i].x;
 		if (list->pos[i].y < res.y)
 			res.y = list->pos[i].y;
+	}
+	return (res);
+}
+
+int					count_tetris(t_tetri *list)
+{
+	t_tetri 		*cur;
+	int				res;
+
+	cur = list;
+	res = 0;
+	while (cur)
+	{
+		res++;
+		cur = cur->next;
 	}
 	return (res);
 }

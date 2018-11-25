@@ -39,11 +39,11 @@ int					check_map(char **line, t_tetri **piece)
 	return (link_counter);
 }
 
-int					fillit(int fd)
+t_map				*fillit(int fd)
 {
 	t_tetri			*list;
-	t_tetri			*res;
 	t_tetri			*old;
+	t_map 			*map;
 	int				ret;
 	char			fill;
 
@@ -51,23 +51,17 @@ int					fillit(int fd)
 	MALLCHECK((list = create_tetri()));
 	while ((ret = get_all_tetri(fd, &list)))
 		if (ret == -1)
-			return (-1);
+			return (NULL);
 	sort_tetri(&list);
 	list = list->next;
 	old = list;
 	while (list)
 	{
-		int i = -1;
 		if (check_map(list->tab, &list) == -1)
-			return (-1);
+			return (NULL);
 		list->fill = fill++;
-		printf("%c\n", list->fill);
-		while (++i < 4)	
-			printf("x: %d, y: %d\n", list->pos[i].x, list->pos[i].y);
-		printf("\n");
 		list = list->next;
 	}
-	t_map *map = new_map(15);
-	solve_map(map, old);
-	return (1);
+	map = solve(old);
+	return (map);
 }
