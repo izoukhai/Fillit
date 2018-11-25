@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../headers/fillit.h"
 
 int			main(int argc, char **argv)
 {
@@ -30,5 +30,6 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	print_map(map);
+	del_map(&map);
 	return (0);
 }

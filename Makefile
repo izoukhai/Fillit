@@ -1,18 +1,17 @@
-
 NAME= fillit
 
 OBJ_PATH= ./obj/
-SRC_PATH=./
+SRC_PATH= ./sources/
 
-SRC_NAME  =  fillit.c main.c  parser.c tetriminos.c solver.c map.c
-OBJ_NAME= $(SRC_NAME:.c=.o)
-OBJ= $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-SRC= $(addprefix $(SRC_PATH), $(SRC_NAME))
+SRC_NAME = fillit.c main.c parser.c tetriminos.c solver.c map.c
+OBJ_NAME = $(SRC_NAME:.c=.o)
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
+SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
-INCLUDES= fillit.h libft/libft.h
+INCLUDES= ./headers/fillit.h ./libft/libft.h
 
 ifndef FLAGS
-FLAGS= -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 endif
 
 CC = gcc
@@ -24,7 +23,7 @@ $(OBJ_PATH):
 
 $(NAME): $(OBJ_PATH) $(OBJ) $(INCLUDES)
 		@make -C libft/
-		@$(CC) $(CFLAGS) -o $(NAME) $(SRC_NAME) ./libft/libft.a
+		@$(CC) $(CFLAGS) -o $(NAME) $(SRC) ./libft/libft.a
 		@echo "\033[32m[Your Fillit is ready]\033[0m"
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c

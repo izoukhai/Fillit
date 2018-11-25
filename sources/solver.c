@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../headers/fillit.h"
 
 static int			get_sqrt(int nb)
 {
@@ -62,5 +62,6 @@ t_map				*solve(t_tetri *list)
 		del_map(&res);
 		res = new_map(size);
 	}
+	del_tetris(&list);
 	return (res);
 }

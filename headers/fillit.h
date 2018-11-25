@@ -13,7 +13,7 @@
 
 #ifndef FILLIT_H
 # define FILLIT_H
-# include "libft/includes/get_next_line.h"
+# include "../libft/includes/get_next_line.h"
 # define MALLCHECK(x) if (!x) return (NULL);
 
 typedef struct		s_point
@@ -27,7 +27,6 @@ typedef struct		s_tetri
 	char			**tab;
 	char			fill;
 	t_point			pos[4];
-	t_point			top;
 	struct s_tetri	*next;
 }					t_tetri;
 
@@ -45,6 +44,7 @@ void				add_tetri(t_tetri **list, t_tetri *new);
 t_tetri				*create_tetri();
 int					get_all_tetri(int fd, t_tetri **list);
 int					count_tetris(t_tetri *list);
+void				del_tetris(t_tetri **list);
 int					check_map(char **line, t_tetri **piece);
 int					solve_map(t_map *map, t_tetri *list);
 t_map				*solve(t_tetri *list);

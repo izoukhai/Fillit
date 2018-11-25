@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../headers/fillit.h"
 
 int					check_map(char **line, t_tetri **piece)
 {

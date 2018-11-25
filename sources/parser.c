@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../headers/fillit.h"
 
 int					check_hashtag(char **line, t_tetri **piece)
 {
@@ -35,7 +35,6 @@ int					check_hashtag(char **line, t_tetri **piece)
 				res++;
 			}
 	}
-	(*piece)->top = get_top(*piece);
 	return (res);
 }
 

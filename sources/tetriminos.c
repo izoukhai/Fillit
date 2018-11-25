@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../headers/fillit.h"
 
 void			add_tetri(t_tetri **list, t_tetri *new)
 {
@@ -32,8 +32,6 @@ t_tetri			*create_tetri(void)
 		return (NULL);
 	if ((res->tab = (char**)malloc(sizeof(char*) * 4)) == NULL)
 		return (NULL);
-	res->top.x = -1;
-	res->top.y = -1;
 	i = (-1);
 	while (++i < 4)
 		if ((res->tab[i] = ft_strnew(4)) == NULL)
@@ -45,6 +43,7 @@ t_tetri			*create_tetri(void)
 		pos->x = -1;
 		pos->y = -1;
 		res->pos[i] = *pos;
+		free(pos);
 	}
 	res->next = NULL;
 	return (res);
@@ -69,22 +68,23 @@ void			sort_tetri(t_tetri **list)
 	*list = tmp;
 }
 
-t_point			get_top(t_tetri *list)
+void			del_tetris(t_tetri **list)
 {
-	t_point		res;
+	t_tetri		*tmp;
 	int			i;
 
-	i = -1;
-	res.x = 1;
-	res.y = 1;
-	while (++i < 4)
+	if (!(*list))
+		return ;
+	while (*list)
 	{
-		if (list->pos[i].x < res.x)
-			res.x = list->pos[i].x;
-		if (list->pos[i].y < res.y)
-			res.y = list->pos[i].y;
+		i = -1;
+		tmp = (*list)->next;
+		while (++i < 4)
+			free((*list)->tab[i]);
+		free((*list)->tab);
+		free(*list);
+		*list = tmp;
 	}
-	return (res);
 }
 
 int				count_tetris(t_tetri *list)
