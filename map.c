@@ -3,8 +3,8 @@
 t_map		*new_map(size_t size)
 {
 	t_map	*res;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	res = (t_map*)malloc(sizeof(t_map));
 	res->tab = (char**)malloc(sizeof(char*) * size);
@@ -22,7 +22,7 @@ t_map		*new_map(size_t size)
 
 void		del_map(t_map **map)
 {
-	int		i;
+	size_t	i;
 
 	i = -1;
 	while (++i < (*map)->size)
@@ -33,7 +33,7 @@ void		del_map(t_map **map)
 
 void		print_map(t_map *map)
 {
-	int		i;
+	size_t	i;
 
 	i = -1;
 	while (++i < map->size)
@@ -47,10 +47,11 @@ int			check_pmap(t_tetri *piece, t_map *map, t_point pos)
 	i = -1;
 	while (++i < 4)
 	{
-		if (pos.y + piece->pos[i].y - piece->pos[0].y >= map->size ||
-			pos.x + piece->pos[i].x - piece->pos[0].x >= map->size)
+		if (pos.y + piece->pos[i].y - piece->pos[0].y >= (int)map->size ||
+				pos.x + piece->pos[i].x - piece->pos[0].x >= (int)map->size)
 			return (0);
-		if (map->tab[pos.y + piece->pos[i].y - piece->pos[0].y][pos.x + piece->pos[i].x - piece->pos[0].x] != '.')
+		if (map->tab[pos.y + piece->pos[i].y - piece->pos[0].y]
+			[pos.x + piece->pos[i].x - piece->pos[0].x] != '.')
 			return (0);
 	}
 	pmap(piece, map, pos, piece->fill);
@@ -59,9 +60,10 @@ int			check_pmap(t_tetri *piece, t_map *map, t_point pos)
 
 void		pmap(t_tetri *piece, t_map *map, t_point pos, char c)
 {
-	int i;
+	int		i;
 
 	i = -1;
 	while (++i < 4)
-		map->tab[pos.y + piece->pos[i].y - piece->pos[0].y][pos.x + piece->pos[i].x - piece->pos[0].x] = c;
+		map->tab[pos.y + piece->pos[i].y - piece->pos[0].y]
+		[pos.x + piece->pos[i].x - piece->pos[0].x] = c;
 }

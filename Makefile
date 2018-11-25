@@ -4,7 +4,7 @@ NAME= fillit
 OBJ_PATH= ./obj/
 SRC_PATH=./
 
-SRC_NAME  =  fillit.c main.c  parser.c tetriminos.c 
+SRC_NAME  =  fillit.c main.c  parser.c tetriminos.c solver.c map.c
 OBJ_NAME= $(SRC_NAME:.c=.o)
 OBJ= $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 SRC= $(addprefix $(SRC_PATH), $(SRC_NAME))

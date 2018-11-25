@@ -43,7 +43,7 @@ t_map				*fillit(int fd)
 {
 	t_tetri			*list;
 	t_tetri			*old;
-	t_map 			*map;
+	t_map			*map;
 	int				ret;
 	char			fill;
 

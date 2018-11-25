@@ -13,7 +13,7 @@
 
 #include "fillit.h"
 
-void		add_tetri(t_tetri **list, t_tetri *new)
+void			add_tetri(t_tetri **list, t_tetri *new)
 {
 	if (*list && new)
 	{
@@ -22,11 +22,11 @@ void		add_tetri(t_tetri **list, t_tetri *new)
 	}
 }
 
-t_tetri		*create_tetri(void)
+t_tetri			*create_tetri(void)
 {
-	int		i;
-	t_tetri	*res;
-	t_point *pos;
+	int			i;
+	t_tetri		*res;
+	t_point		*pos;
 
 	if ((res = (t_tetri*)malloc(sizeof(t_tetri))) == NULL)
 		return (NULL);
@@ -50,11 +50,11 @@ t_tetri		*create_tetri(void)
 	return (res);
 }
 
-void		sort_tetri(t_tetri **list)
+void			sort_tetri(t_tetri **list)
 {
-	t_tetri	*tmp;
-	t_tetri	*tmp2;
-	t_tetri	*tmp3;
+	t_tetri		*tmp;
+	t_tetri		*tmp2;
+	t_tetri		*tmp3;
 
 	tmp = *list;
 	tmp2 = tmp->next;
@@ -69,16 +69,16 @@ void		sort_tetri(t_tetri **list)
 	*list = tmp;
 }
 
-t_point		get_top(t_tetri *list)
+t_point			get_top(t_tetri *list)
 {
-	t_point	res;
-	int 	i;
+	t_point		res;
+	int			i;
 
 	i = -1;
 	res.x = 1;
 	res.y = 1;
 	while (++i < 4)
-	{ 
+	{
 		if (list->pos[i].x < res.x)
 			res.x = list->pos[i].x;
 		if (list->pos[i].y < res.y)
@@ -87,10 +87,10 @@ t_point		get_top(t_tetri *list)
 	return (res);
 }
 
-int					count_tetris(t_tetri *list)
+int				count_tetris(t_tetri *list)
 {
-	t_tetri 		*cur;
-	int				res;
+	t_tetri		*cur;
+	int			res;
 
 	cur = list;
 	res = 0;

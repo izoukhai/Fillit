@@ -36,8 +36,6 @@ int					check_hashtag(char **line, t_tetri **piece)
 			}
 	}
 	(*piece)->top = get_top(*piece);
-	/*printf("TOP.X: %d\n", (*piece)->top.x);
-	printf("TOP.Y: %d\n", (*piece)->top.y);*/
 	return (res);
 }
 
@@ -86,7 +84,7 @@ int					get_all_tetri(int fd, t_tetri **list)
 	int				curr;
 
 	if ((cur = create_tetri()) == NULL)
-		return(-1);
+		return (-1);
 	curr = -1;
 	x = 1;
 	while (get_next_line(fd, &line) == 1)
