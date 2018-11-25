@@ -19,20 +19,24 @@ int					check_hashtag(char **line, t_tetri **piece)
 	int				x;
 	int				res;
 	int				i;
+	int				count;
 
+	count = 0;
 	res = 0;
 	y = -1;
 	i = 0;
-	while (line[++y] && y < 4)
+	while (++y < 4)
 	{
 		x = -1;
-		while (line[y][++x])
+		while (++x < 4)
 			if (line[y][x] == '#')
 			{
-				(*piece)->pos[i].x = x + 1;
-				(*piece)->pos[i].y = y + 1;
+				(*piece)->pos[i].x = x;
+				(*piece)->pos[i].y = y;
 				i++;
-				res++;
+				res++ && count++;
+				if (count > 4)
+					return (-1);
 			}
 	}
 	return (res);
