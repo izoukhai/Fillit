@@ -1,3 +1,4 @@
+
 NAME= fillit
 
 OBJ_PATH= ./obj/
@@ -27,13 +28,13 @@ $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 		@echo  "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
 		@gcc $(FLAGS) -o $@ -c $^
 clean :
-		rm -rf $(OBJ_PATH)
+		@rm -rf $(OBJ_PATH)
 		@make clean -C libft/ 
 		@echo "\033[0;32m [OK] \033[0m       \033[0;33m File.o deleted:\033[0m" $<
 
 fclean : clean
-		rm -rf $(NAME)
-		rm -rf $(OBJ_PATH)
+		@rm -rf $(NAME)
+		@rm -rf $(OBJ_PATH)
 		@make fclean -C libft/
 		@echo  "\033[0;32m [OK] \033[0m       \033[0;33m Fillit deleted:\033[0m" $<
 
